@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="icraftsoft-users-management-suite.xml" />
+	<munit:test name="put:\users\(userid):application\json:wsdl-raml-config-test" doc:id="e196c039-b12d-49d4-938b-dcdcecece900" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock updateUser Flow" doc:id="59e27676-6f65-4cf6-a155-b1e3c0882a33" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="1d986c00-182e-4aa3-b3c9-4cc591d1c1b3" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://putusersuseridapplicationjsonwsdlramlconfigtest\mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://putusersuseridapplicationjsonwsdlramlconfigtest\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://putusersuseridapplicationjsonwsdlramlconfigtest\mock_variable_.dwl')]" />
+						<munit-tools:variable key="userid" value="#[output application/java --- readUrl('classpath://putusersuseridapplicationjsonwsdlramlconfigtest\mock_variable_1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="3917c40d-ea4b-4b02-80ee-98dc0b6b29ee" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://putusersuseridapplicationjsonwsdlramlconfigtest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://putusersuseridapplicationjsonwsdlramlconfigtest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://putusersuseridapplicationjsonwsdlramlconfigtest\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to put:\users\(userid):application\json:wsdl-raml-config" doc:id="f872ef5b-a192-44d0-81cc-f1f3bec37760" name="put:\users\(userid):application\json:wsdl-raml-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="e33d339d-ce95-42b6-9a06-6e09dd85270d" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import putusersuseridapplicationjsonwsdlramlconfigtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="get:\users:wsdl-raml-config-test" doc:id="8bd27baa-8127-42b9-b58e-0796341fd45a" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock getAllUsers Flow" doc:id="efede66a-cc40-400f-959b-f211cf78e6bd" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="7cc16726-f653-49e8-a98f-12a9f9686e2f" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://getuserswsdlramlconfigtest\mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://getuserswsdlramlconfigtest\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getuserswsdlramlconfigtest\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="c750d057-be6a-4521-a6a3-f642a8ffe0e7" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://getuserswsdlramlconfigtest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://getuserswsdlramlconfigtest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getuserswsdlramlconfigtest\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\users:wsdl-raml-config" doc:id="790707ed-ed1b-4709-8573-7a8a8c8e7cd2" name="get:\users:wsdl-raml-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="425ebc9e-ac88-4c3e-a5ba-7de95cb559b4" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import getuserswsdlramlconfigtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="get:\users\(userid):wsdl-raml-config-test" doc:id="5026500e-9b58-4cd7-abb9-d8ac27da908d" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock getUser Flow " doc:id="cff083b8-14ce-4783-8869-611b7a282305" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="b9d6f78c-f876-4966-98f4-61173d54db98" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://getusersuseridwsdlramlconfigtest\mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://getusersuseridwsdlramlconfigtest\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getusersuseridwsdlramlconfigtest\mock_variable_.dwl')]" />
+						<munit-tools:variable key="userid" value="#[output application/java --- readUrl('classpath://getusersuseridwsdlramlconfigtest\mock_variable_1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="cabeb88a-a88a-43b3-8704-b983bb219315" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://getusersuseridwsdlramlconfigtest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://getusersuseridwsdlramlconfigtest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getusersuseridwsdlramlconfigtest\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\users\(userid):wsdl-raml-config" doc:id="3e97e7b2-f092-4f68-b178-3082689940fa" name="get:\users\(userid):wsdl-raml-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="a608a362-0e1e-42a1-b465-24cfaf16efe4" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import getusersuseridwsdlramlconfigtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="post:\users:application\json:wsdl-raml-config-test" doc:id="87533327-f141-44c9-bcd1-576e394c2d9c" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock createUser Flow " doc:id="07445f8f-5ae8-4d84-af5d-af9ee68efbb5" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="005ea1c0-f7a7-44f0-82c0-0e784f714231" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://postusersapplicationjsonwsdlramlconfigtest\mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://postusersapplicationjsonwsdlramlconfigtest\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://postusersapplicationjsonwsdlramlconfigtest\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="e9981d5a-2759-47de-a5ce-1ea66498b355" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://postusersapplicationjsonwsdlramlconfigtest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://postusersapplicationjsonwsdlramlconfigtest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://postusersapplicationjsonwsdlramlconfigtest\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to post:\users:application\json:wsdl-raml-config" doc:id="d5692145-59dd-4d08-998a-da4f728ba390" name="post:\users:application\json:wsdl-raml-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="5ba2061c-d8dc-4576-bef3-348e82c8540c" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import postusersapplicationjsonwsdlramlconfigtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="delete:\users\(userid):wsdl-raml-config-test" doc:id="a737deac-cd29-473f-a056-5db39baa75cf" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock deleteUser Flow " doc:id="0c5eb787-ffbe-4043-82ac-7885b4ec49ee" processor="flow-ref">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="af58f61b-e8a7-45ed-a4f2-cffff5764c8a" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://deleteusersuseridwsdlramlconfigtest\mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://deleteusersuseridwsdlramlconfigtest\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://deleteusersuseridwsdlramlconfigtest\mock_variable_.dwl')]" />
+						<munit-tools:variable key="userid" value="#[output application/java --- readUrl('classpath://deleteusersuseridwsdlramlconfigtest\mock_variable_1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="1899769c-fcaa-4591-8862-ccd5df17b1ac" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://deleteusersuseridwsdlramlconfigtest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://deleteusersuseridwsdlramlconfigtest\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://deleteusersuseridwsdlramlconfigtest\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to delete:\users\(userid):wsdl-raml-config" doc:id="dc5b09db-5a11-49a6-bb45-41829588eccf" name="delete:\users\(userid):wsdl-raml-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="8609205e-cbae-4d3d-904d-4dc81b2ebcbf" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import deleteusersuseridwsdlramlconfigtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getUser-Sub_Flow-test" doc:id="62430ac3-5bea-430d-8ff5-9521eb8d3735">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock GetUser" doc:id="7b7ab726-7a72-4b73-9eb4-f4e197b85ef9" processor="wsc:consume">
+					<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="f43a8018-20a3-42e4-ad23-4463ff99435b" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="f43a8018-20a3-42e4-ad23-4463ff99435b" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return>
+						<munit-tools:payload value="#[output application/java --- readUrl('classpath://getUserSubFlowtest\mock_payload.dwl')]" mediaType="application/java" encoding="UTF-8" />
+						<munit-tools:attributes value="#[readUrl('classpath://getUserSubFlowtest\mock_attributes.dwl')]" />
+						<munit-tools:variables>
+							<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getUserSubFlowtest\mock_variable_.dwl')]" />
+							<munit-tools:variable key="userid" value="#[output application/java --- readUrl('classpath://getUserSubFlowtest\mock_variable_1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+						</munit-tools:variables>
+					</munit-tools:then-return>
+				</munit-tools:mock-when>
+				<munit:set-event doc:name="Set Input" doc:id="6f54a45e-9529-4b13-b03d-69d31197cf43">
+					<munit:payload value="#[readUrl('classpath://getUserSubFlowtest\set-event_payload.dwl')]" encoding="UTF-8" />
+					<munit:attributes value="#[readUrl('classpath://getUserSubFlowtest\set-event_attributes.dwl')]" />
+					<munit:variables>
+						<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getUserSubFlowtest\set-event_variable_.dwl')]" />
+					</munit:variables>
+				</munit:set-event>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to getUser-Sub_Flow" doc:id="6b212f87-ea17-43d5-86cb-a76220020eac" name="getUser-Sub_Flow" />
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert doc:name="Assert payload" doc:id="0e709eaf-cdf0-42e4-90a2-5552e6ab39e0" message="The payload does not match">
+					<munit-tools:that><![CDATA[#[%dw 2.0
+import getUserSubFlowtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+				</munit-tools:assert>
+				<munit-tools:verify-call doc:name="Verify Message" doc:id="8b09feee-744b-4cb5-9f9a-79c72d320ff2" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="941e421e-34f5-4216-b73d-44d309dd51bb" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="941e421e-34f5-4216-b73d-44d309dd51bb" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				</munit-tools:verify-call>
+				<munit-tools:verify-call doc:name="Verify getUserRequest" doc:id="a1799ad3-32f2-4d74-badd-8dfc7f117cf5" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="e02a59bf-5f1a-4f50-b000-7e34eef8c9ac" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="e02a59bf-5f1a-4f50-b000-7e34eef8c9ac" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				</munit-tools:verify-call>
+				<munit-tools:verify-call doc:name="Verify uriParams" doc:id="b9e7d7cb-b841-43c1-935d-39020bde05c6" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="8ecbe5db-5585-4ac9-b7c8-4d983c29d8ff" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="8ecbe5db-5585-4ac9-b7c8-4d983c29d8ff" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				</munit-tools:verify-call>
+			</munit:validation>
+		</munit:test>
+	<munit:test name="createUser-Sub_Flow-test" doc:id="6b0d4323-03c1-4a15-93c4-6364fd90a431">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock createUsera" doc:id="0efc3b03-9419-4fbd-b6df-a02f64cd7c36" processor="wsc:consume">
+					<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="3fcb4e42-4ab2-4b59-a534-5ac050d4eb87" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="3fcb4e42-4ab2-4b59-a534-5ac050d4eb87" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return>
+						<munit-tools:payload value="#[output application/java --- readUrl('classpath://createUserSubFlowtest\mock_payload.dwl')]" mediaType="application/java" encoding="UTF-8" />
+						<munit-tools:attributes value="#[readUrl('classpath://createUserSubFlowtest\mock_attributes.dwl')]" />
+						<munit-tools:variables>
+							<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://createUserSubFlowtest\mock_variable_.dwl')]" />
+						</munit-tools:variables>
+					</munit-tools:then-return>
+				</munit-tools:mock-when>
+				<munit:set-event doc:name="Set Input" doc:id="12a2f849-7317-439a-a8e7-2aa03673916d">
+					<munit:payload value="#[output application/json --- readUrl('classpath://createUserSubFlowtest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+					<munit:attributes value="#[readUrl('classpath://createUserSubFlowtest\set-event_attributes.dwl')]" />
+					<munit:variables>
+						<munit:variable key="outboundHeaders" value="#[readUrl('classpath://createUserSubFlowtest\set-event_variable_.dwl')]" />
+					</munit:variables>
+				</munit:set-event>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to createUser-Sub_Flow" doc:id="8c138d08-fe57-4c9d-92c0-f3b4816eb758" name="createUser-Sub_Flow" />
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert doc:name="Assert payload" doc:id="d4e94eca-bf0a-4720-b82c-9c748865f6f6" message="The payload does not match">
+					<munit-tools:that><![CDATA[#[%dw 2.0
+import createUserSubFlowtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+				</munit-tools:assert>
+				<munit-tools:verify-call doc:name="Verify userRequest" doc:id="a052d80f-36f3-4e9c-a1c9-d154e4184130" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="8337aff7-9ade-4d8c-92ac-f7632c381f52" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="8337aff7-9ade-4d8c-92ac-f7632c381f52" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				</munit-tools:verify-call>
+				<munit-tools:verify-call doc:name="Verify Message" doc:id="5d648916-a655-4507-8879-b4a7082d53d6" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="70e699f8-41aa-4d3a-9235-882cec6a6a06" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="70e699f8-41aa-4d3a-9235-882cec6a6a06" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				</munit-tools:verify-call>
+			</munit:validation>
+		</munit:test>
+	<munit:test name="updateUser-Sub_Flow-test" doc:id="f33fb4f4-4d04-43f6-bc34-c1cca56f59ae">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock UpdateUser" doc:id="54f76631-dadf-42d9-bccb-baf8e2aeca02" processor="wsc:consume">
+					<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="09ac6810-fc1e-4d6c-a344-ba9baf315658" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="09ac6810-fc1e-4d6c-a344-ba9baf315658" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return>
+						<munit-tools:payload value="#[output application/java --- readUrl('classpath://updateUserSubFlowtest\mock_payload.dwl')]" mediaType="application/java" encoding="UTF-8" />
+						<munit-tools:attributes value="#[readUrl('classpath://updateUserSubFlowtest\mock_attributes.dwl')]" />
+						<munit-tools:variables>
+							<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://updateUserSubFlowtest\mock_variable_.dwl')]" />
+							<munit-tools:variable key="userid" value="#[output application/java --- readUrl('classpath://updateUserSubFlowtest\mock_variable_1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+						</munit-tools:variables>
+					</munit-tools:then-return>
+				</munit-tools:mock-when>
+				<munit:set-event doc:name="Set Input" doc:id="bdc2ada5-c94d-47a2-ab8f-81a52089d567">
+					<munit:payload value="#[output application/json --- readUrl('classpath://updateUserSubFlowtest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+					<munit:attributes value="#[readUrl('classpath://updateUserSubFlowtest\set-event_attributes.dwl')]" />
+					<munit:variables>
+						<munit:variable key="outboundHeaders" value="#[readUrl('classpath://updateUserSubFlowtest\set-event_variable_.dwl')]" />
+					</munit:variables>
+				</munit:set-event>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to updateUser-Sub_Flow" doc:id="998591fe-107f-4b9a-80a5-75e78867ee30" name="updateUser-Sub_Flow" />
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert doc:name="Assert payload" doc:id="88c1fdfe-cb19-4c50-869d-c547b19f2ebe" message="The payload does not match">
+					<munit-tools:that><![CDATA[#[%dw 2.0
+import updateUserSubFlowtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+				</munit-tools:assert>
+				<munit-tools:verify-call doc:name="Verify userId" doc:id="454e8b04-9d99-4d6e-ba7b-0f81f920e3cf" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="294e3f96-74ac-4d39-8808-2ea6b29d63fe" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="294e3f96-74ac-4d39-8808-2ea6b29d63fe" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				</munit-tools:verify-call>
+				<munit-tools:verify-call doc:name="Verify Message" doc:id="06b908f7-3be4-4d95-80e7-80f254faf293" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="bd6c9113-2fbc-48b1-a47f-37aaf1ebcb4a" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="bd6c9113-2fbc-48b1-a47f-37aaf1ebcb4a" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				</munit-tools:verify-call>
+				<munit-tools:verify-call doc:name="Verify updateUserRequest" doc:id="bedfcb27-4a1c-46d3-a0f8-2e325f6944b5" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="a94726ea-85f4-4bcf-a004-705e3d73061d" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="a94726ea-85f4-4bcf-a004-705e3d73061d" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				</munit-tools:verify-call>
+			</munit:validation>
+		</munit:test>
+	<munit:test name="deleteUser-Sub_Flow-test" doc:id="7920ab5a-f5d9-4e40-8a73-d31a59878da7">
+			<munit:behavior>
+				<munit-tools:mock-when doc:name="Mock DeleteUser" doc:id="8cd0533b-d56b-4763-8fe5-30100ee107ad" processor="wsc:consume">
+					<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="4e250e1d-5d9a-41ad-8b48-4f67e32c3fad" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="4e250e1d-5d9a-41ad-8b48-4f67e32c3fad" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return>
+						<munit-tools:payload value="#[output application/java --- readUrl('classpath://deleteUserSubFlowtest\mock_payload.dwl')]" mediaType="application/java" encoding="UTF-8" />
+						<munit-tools:attributes value="#[readUrl('classpath://deleteUserSubFlowtest\mock_attributes.dwl')]" />
+						<munit-tools:variables>
+							<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://deleteUserSubFlowtest\mock_variable_.dwl')]" />
+							<munit-tools:variable key="userid" value="#[output application/java --- readUrl('classpath://deleteUserSubFlowtest\mock_variable_1.dwl')]" mediaType="application/java" encoding="UTF-8" />
+						</munit-tools:variables>
+					</munit-tools:then-return>
+				</munit-tools:mock-when>
+				<munit:set-event doc:name="Set Input" doc:id="b87e6b4d-c428-4c0c-a092-701ea07200ba">
+					<munit:payload value="#[output application/json --- readUrl('classpath://deleteUserSubFlowtest\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+					<munit:attributes value="#[readUrl('classpath://deleteUserSubFlowtest\set-event_attributes.dwl')]" />
+					<munit:variables>
+						<munit:variable key="outboundHeaders" value="#[readUrl('classpath://deleteUserSubFlowtest\set-event_variable_.dwl')]" />
+					</munit:variables>
+				</munit:set-event>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to deleteUser-Sub_Flow" doc:id="f7849c32-8b2a-4d2d-ab21-557991de1494" name="deleteUser-Sub_Flow" />
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert doc:name="Assert payload" doc:id="e7777c82-e73d-474f-8582-6b36f4dbbbca" message="The payload does not match">
+					<munit-tools:that><![CDATA[#[%dw 2.0
+import deleteUserSubFlowtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+				</munit-tools:assert>
+				<munit-tools:verify-call doc:name="Verify msg return" doc:id="022ddd4a-ba20-4399-a76e-792d45ade95d" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="523d2d91-7b9f-4936-9143-f315d1e4d7d4" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="523d2d91-7b9f-4936-9143-f315d1e4d7d4" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				</munit-tools:verify-call>
+				<munit-tools:verify-call doc:name="Verify userRequest" doc:id="c27c0f00-2f36-4516-b68c-dbf6ac77cfbb" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="9b5fe894-33c4-4005-9371-0672b1c18ed6" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="9b5fe894-33c4-4005-9371-0672b1c18ed6" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				</munit-tools:verify-call>
+				<munit-tools:verify-call doc:name="Verify uriParams" doc:id="8b5f083d-62be-454b-82e5-9ade2eff5cb4" processor="ee:transform" times="1">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="c996fdc8-11b7-4940-a460-96d2dea55785" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="c996fdc8-11b7-4940-a460-96d2dea55785" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				</munit-tools:verify-call>
+			</munit:validation>
+		</munit:test>
+	<munit:test name="getAllUsers-Sub_Flow-test" doc:id="e1e8e39e-86b3-41ce-b9ae-1fc17c1ef77e">
+			<munit:behavior>
+				<munit-tools:spy doc:name="Spy GetAllUsers" doc:id="8ad6a42f-1d46-4a77-a231-9f8869521569" processor="wsc:consume">
+					<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="7888e564-da41-4f22-b307-96851ded43c7" attributeName="doc:id" />
+					<munit-tools:with-attribute whereValue="7888e564-da41-4f22-b307-96851ded43c7" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:before-call>
+						<munit-tools:assert doc:name="Assert payload" doc:id="1830d9d8-7878-4f49-bf6b-25fccc7c0e93" message="The payload does not match">
+							<munit-tools:that><![CDATA[#[%dw 2.0
+import getAllUsersSubFlowtest::spy_assert_payload
+---
+spy_assert_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+						</munit-tools:assert>
+					</munit-tools:before-call>
+					<munit-tools:after-call>
+						<munit-tools:assert doc:name="Assert payload" doc:id="ff750ff2-b926-4058-9af6-04e2d55fb1e2" message="The payload does not match">
+							<munit-tools:that><![CDATA[#[%dw 2.0
+import getAllUsersSubFlowtest::spy_assert_payload1
+---
+spy_assert_payload1::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+						</munit-tools:assert>
+					</munit-tools:after-call>
+				</munit-tools:spy>
+				<munit:set-event doc:name="Set Input" doc:id="f16c8094-424c-4a62-a69e-9fe086845939">
+					<munit:payload value="#[readUrl('classpath://getAllUsersSubFlowtest\set-event_payload.dwl')]" encoding="UTF-8" />
+					<munit:attributes value="#[readUrl('classpath://getAllUsersSubFlowtest\set-event_attributes.dwl')]" />
+					<munit:variables>
+						<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getAllUsersSubFlowtest\set-event_variable_.dwl')]" />
+					</munit:variables>
+				</munit:set-event>
+			</munit:behavior>
+			<munit:execution>
+				<flow-ref doc:name="Flow-ref to getAllUsers-Sub_Flow" doc:id="e1807266-80db-4746-95fe-13a0254ba5e2" name="getAllUsers-Sub_Flow" />
+			</munit:execution>
+			<munit:validation>
+				<munit-tools:assert doc:name="Assert payload" doc:id="8e7ac16b-6c8f-42c2-a5de-0518f019b2d8" message="The payload does not match">
+					<munit-tools:that><![CDATA[#[%dw 2.0
+import getAllUsersSubFlowtest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+				</munit-tools:assert>
+				<munit-tools:verify-call doc:name="Verify Transform" doc:id="657d1cb6-0bfa-4f1d-871d-edf9bcefb2bd" processor="ee:transform" times="1">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="60f67638-cbae-46f7-aab6-d23bbe446915" attributeName="doc:id" />
+					</munit-tools:with-attributes>
+				</munit-tools:verify-call>
+				<munit-tools:verify-call doc:name="Verify GetAllUsersRequest" doc:id="74b121c5-2701-4158-9a3a-46df83f6e2b2" processor="ee:transform" times="1">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="08e2399d-d413-45e3-a916-44bc9b4b5737" attributeName="doc:id" />
+					</munit-tools:with-attributes>
+				</munit-tools:verify-call>
+				<munit-tools:verify-call doc:name="Verify GetAllUsers" doc:id="16b23be4-acca-43e4-bf76-0a612763bbbd" processor="wsc:consume" times="1">
+					<munit-tools:with-attributes>
+						<munit-tools:with-attribute whereValue="7888e564-da41-4f22-b307-96851ded43c7" attributeName="doc:id" />
+					</munit-tools:with-attributes>
+				</munit-tools:verify-call>
+			</munit:validation>
+		</munit:test>
+	<munit:test name="wsdl-raml-main-test" doc:id="8c63d960-8a1f-47e5-aa17-725c248cc4f9" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock APIkit Router" doc:id="bf6e4fdd-5d1f-4645-8010-360bdd54b3a2" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="e3966334-6d1f-462f-bb31-94206d1763c0" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://wsdlramlmaintest\mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:attributes value="#[readUrl('classpath://wsdlramlmaintest\mock_attributes.dwl')]" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://wsdlramlmaintest\mock_variable_.dwl')]" />
+						<munit-tools:variable key="httpStatus" value="#[readUrl('classpath://wsdlramlmaintest\mock_variable_1.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="b590ced3-4545-4033-9741-ffcab43e639c" >
+				<munit:payload value="#[readUrl('classpath://wsdlramlmaintest\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://wsdlramlmaintest\set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to wsdl-raml-main" doc:id="a4f3af21-7a09-44ca-9c49-1def56b9cd8b" name="wsdl-raml-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="11fc1776-2fd5-423a-b111-8c7eec488cc0" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import wsdlramlmaintest::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

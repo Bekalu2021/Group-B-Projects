@@ -1,0 +1,3 @@
+config:
+  wsdllocation: "http://api.icraftsoft.net:5858/ws/users.wsdl"
+  
