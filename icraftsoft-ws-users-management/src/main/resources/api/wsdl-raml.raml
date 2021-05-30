@@ -1,0 +1,105 @@
+#%RAML 1.0
+title: icraftsoft users management
+uses:
+  lib: library.raml
+/users:
+  post:
+    displayName: CreateUser
+    body:
+      application/json:
+        type: object
+        example: !include Example/users-example.raml
+    responses:
+      201:
+        body:
+          application/json:
+            type: object
+            example:
+              {"userid":37}
+      400:
+        body:
+          application/json:
+            type: object
+            example:
+              {"msg":"Bad request"}
+    is:
+       - lib.404trait 
+  get:
+    displayName: GetAllUsers
+    responses:
+      200:
+        body:
+          application/json:
+            type: lib.datatype[]
+            example: !include Example/get-users-example.raml
+  /{userid}:
+    get:
+      displayName: GetUser
+      responses:
+        200:
+          body:
+            application/json:
+              type: lib.datatype
+              example: !include Example/get-users-id-example.raml
+      is:
+         - lib.404trait
+    delete:
+      displayName: DeleteUser
+      responses:
+        204:
+          body:
+            application/json:
+              type: object
+              example:
+                {"msg":"delted successfully"}
+      is:
+        - lib.404trait
+    put:
+      body:
+        application/json:
+          type: lib.datatype
+          example: !include Example/put-example.raml
+      displayName: UpdateUser
+      responses:
+        201:
+          body:
+            application/json:
+              type: object
+              example:
+                {"msg":"updated successfully"}
+        400:
+          body:
+            application/json:
+              type: object
+              example:
+                {"msg":"Bad Request"}
+      is:
+         - lib.404trait          
+                
+
+                            
+                
+        
+                                     
+
+                                   
+                
+          
+                          
+              
+    
+                     
+
+  
+      
+
+
+
+    
+               
+
+                          
+        
+                  
+          
+ 
